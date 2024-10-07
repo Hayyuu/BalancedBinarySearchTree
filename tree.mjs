@@ -20,6 +20,36 @@ class Tree{
     feedData(){
         return this.buildTree(this.arr,0,this.arr.length-1);
     }
+    insert(root,value){
+      let newNode=new Node(value);
+      if(root===null){
+        root=newNode;
+      }
+      let parentNode=null;
+      let currentNode=root;
+      while(currentNode!==null){
+          parentNode=currentNode;
+          if(value>currentNode.data){
+            currentNode=currentNode.right;
+          }
+          else if(value<currentNode.data){
+            currentNode=currentNode.left;
+          }
+          else{
+            return;
+          }
+          
+        }
+     if(value>parentNode.data){
+        parentNode.right=newNode;
+      }
+      else{
+        parentNode.left=newNode;
+      }
+      
+    return root;
+      
+    }
     
 }
 
@@ -39,4 +69,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     }
   };
 
-prettyPrint(tree.feedData());
+let rootNode=tree.feedData();
+prettyPrint(rootNode);
+rootNode=tree.insert(rootNode,0);
+prettyPrint(rootNode);
